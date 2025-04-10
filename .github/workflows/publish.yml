@@ -19,11 +19,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+      - name: Run tests
+        run: mvn test
       - name: Generate tag
         run: echo "tag=$(mvn -q help:evaluate -Dexpression=project.version -DforceStdout)" >> $GITHUB_OUTPUT
         id: project
-      - name: Run tests
-        run: mvn test
       - name: Generate Docker image
         run: | 
           mvn spring-boot:build-image -DskipTests
